@@ -36,4 +36,69 @@ class HelperTest {
         // Assert
         assertEquals(expected, actual);
     }
+
+    @org.junit.jupiter.api.Test
+    void getTripleAge() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getCatsAge() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getDogYears() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getFromCatYears() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getFromDogYears() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getFromGoldfishYears() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getFromHamsterYears() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getFromHorseYears() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getFromRabbitYears() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getGoldfishYears() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getHamsterYears() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getHorseYears() {
+        assertTrue(false); // Test not implemented.
+    }
+
+    @org.junit.jupiter.api.Test
+    void getRabbitYears() {
+        assertTrue(false); // Test not implemented.
+    }
 }
