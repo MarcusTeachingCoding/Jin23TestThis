@@ -35,21 +35,4 @@ jobs:
           mkdir -p test-results
           mv Main/target/surefire-reports/*.xml test-results/
           echo "test_results_file=test-results/*.xml" >> $GITHUB_STATE
-
-      - name: Calculate score
-        if: ${{ always() }}
-        id: score
-        run: |
-          TESTS_PASSED=$(grep -c "<failure" $test_results_file)
-          SCORE=$((TESTS_PASSED * 10))
-          echo "score=$SCORE" >> $GITHUB_STATE
-
-      - name: Set output
-        if: ${{ always() }}
-        run: |
-          if [[ -z "$SCORE" ]]; then
-            echo "score=0" >> $GITHUB_OUTPUT
-          else
-            echo "score=$SCORE" >> $GITHUB_OUTPUT
-          fi
-
+          echo $GITHUB_STATE
