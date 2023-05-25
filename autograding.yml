@@ -1,0 +1,43 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '19'
+        distribution: 'adopt'
+        
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build with Maven
+      run: mvn clean install --file Main/pom.xml
+      
+    - name: Run tests with Maven
+      run: mvn -B test  --file Main/pom.xml
+
+    - name: Parse test results
+      run: |
+            # Example: Parse JUnit test results using XML output
+            mkdir -p test-results
+            mv target/surefire-reports/*.xml test-results/
+            echo "test_results_file=test-results/*.xml" >> $GITHUB_ENV
+
+    - name: Calculate score
+      run: |
+            # Example: Count the number of passing tests
+            TESTS_PASSED=$(grep -c "<failure" $test_results_file)
+            SCORE=$((TESTS_PASSED * 10))  # Assign 10 points per passing test
+            echo "score=$SCORE" >> $GITHUB_ENV
