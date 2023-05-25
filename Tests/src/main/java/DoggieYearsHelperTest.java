@@ -1,7 +1,8 @@
+import org.campusmolndal.Helpers.DoggieYearsHelper;
+import org.campusmolndal.People.Person;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.campusmolndal.People.*;
-import org.campusmolndal.Helpers.*;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DoggieYearsHelperTest {
