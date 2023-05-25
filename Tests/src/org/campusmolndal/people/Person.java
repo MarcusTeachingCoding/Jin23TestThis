@@ -1,8 +1,8 @@
-package org.campusmolndal.People;
+package org.campusmolndal.people;
 
 public class Person {
-    public int age;
-    public String name;
+    int age;
+    String name;
 
     public Person(int age, String name) {
         this.age = age;
