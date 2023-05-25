@@ -1,4 +1,4 @@
-name: Autograding Java
+name: Autograding
 
 on:
   push:
@@ -13,32 +13,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distribution: 'adopt'
-        
-      - name: Checkout code
-        uses: actions/checkout@v2
 
       - name: Build with Maven
         run: mvn clean install --file Main/pom.xml
-      
-      - name: Run tests with Maven
-        run: mvn -B test --file Main/pom.xml
 
-      - name: Autocorrect code
-        run: mvn spotless:apply --file Main/pom.xml
+      - name: Run tests
+        id: tests
+        run: mvn test --file Main/pom.xml
 
       - name: Parse test results
+        if: ${{ always() }}
         run: |
           mkdir -p test-results
           mv Main/target/surefire-reports/*.xml test-results/
-          echo "test_results_file=test-results/*.xml" >> $GITHUB_ENV
+          echo "test_results_file=test-results/*.xml" >> $GITHUB_STATE
 
       - name: Calculate score
+        if: ${{ always() }}
+        id: score
         run: |
           TESTS_PASSED=$(grep -c "<failure" $test_results_file)
-          SCORE=$((TESTS_PASSED * 10))  # Assign 10 points per passing test
-          echo "score=$SCORE" >> $GITHUB_ENV
+          SCORE=$((TESTS_PASSED * 10))
+          echo "score=$SCORE" >> $GITHUB_STATE
+
+      - name: Set output
+        if: ${{ always() }}
+        run: |
+          if [[ -z "$SCORE" ]]; then
+            echo "score=0" >> $GITHUB_OUTPUT
+          else
+            echo "score=$SCORE" >> $GITHUB_OUTPUT
+          fi
