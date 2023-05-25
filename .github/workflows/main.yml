@@ -1,23 +1,26 @@
-name: tests
-on: push
+name: Java CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  run_tests:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set up JDK latest
-        uses: actions/setup-java@v2
-        with:
-          java-version: 'latest'
-          distribution: 'adopt'
-      - name: Cache Maven packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-      - name: Run tests with Maven
-        run: mvn -B test --file pom.xml
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build with Maven
+      run: mvn clean install
+      
+    - name: Run tests with Maven
+      run: mvn -B test --file pom.xml
