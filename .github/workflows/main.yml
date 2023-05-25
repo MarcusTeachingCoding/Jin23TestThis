@@ -26,4 +26,4 @@ jobs:
       run: mvn clean install --file Main/pom.xml
       
     - name: Run tests with Maven
-      run: mvn -B test --file Main/pom.xml
+      run: mvn -B test  --file Main/pom.xml
